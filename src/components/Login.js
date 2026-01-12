@@ -1,12 +1,29 @@
 import { Link } from "react-router-dom";
 import Header from "./Header";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { checkValidData } from "../utils/validate";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
 
   const toggleSignUpForm = () => {
     setIsSignInForm(!isSignInForm);
+    setErrorMessage(null);
+  };
+
+  const handleButtonClick = () => {
+    /*Validate*/
+    const message = checkValidData(
+      isSignInForm ? null : name.current.value,
+      email.current.value,
+      password.current.value
+    );
+    setErrorMessage(message);
   };
 
   return (
@@ -19,30 +36,43 @@ const Login = () => {
         ></img>
       </div>
 
-      <form className="absolute p-12 bg-black/80  w-3/12 my-36 mx-auto left-0 right-0 text-white flex flex-col gap-5 rounded-sm">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="absolute p-12 bg-black/80  w-3/12 my-36 mx-auto left-0 right-0 text-white flex flex-col gap-5 rounded-sm"
+      >
         <h1 className="text-3xl font-bold">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
           <input
+            ref={name}
             className="px-4 py-4 border rounded-md bg-transparent"
             type="text"
             placeholder="Full Name"
           ></input>
         )}
         <input
+          ref={email}
           className="px-4 py-4 border rounded-md bg-transparent"
           type="text"
-          placeholder="Email or mobile number"
+          placeholder="Email ID"
         ></input>
         <input
+          ref={password}
           className="px-4 py-4 border rounded-md bg-transparent"
-          type="text"
+          type="password"
           placeholder="Password"
         ></input>
-        <button className="px-8 py-2 bg-red-600 rounded-md font-bold">
+        <button
+          onClick={handleButtonClick}
+          className="px-8 py-2 bg-red-600 rounded-md font-bold"
+        >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
+        {errorMessage && (
+          <p className="text-red-500 font-semibold">{errorMessage}</p>
+        )}
+
         <p>
           {isSignInForm ? "New to Netflix?" : "Already a User?"}
           <Link
