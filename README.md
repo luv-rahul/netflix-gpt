@@ -9,6 +9,11 @@
 - Firebase Setup
 - Deployed on Firebase (Steps Below)
 - Create Sign Up User
+- Create SignUp User Account
+- Implement Sign In user Api
+- Created Redux Store with userSlice
+- Implemented Sign out
+- Update Profile
 
 ## Features
 
@@ -40,4 +45,3 @@
 3. Intialise Firebase - firebase init
 4. Select Hosting
 5. Deploy Command - firebase deploy
-
