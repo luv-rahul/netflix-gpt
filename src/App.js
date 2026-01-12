@@ -1,7 +1,11 @@
-import "./App.css";
+import Body from "./components/Body";
 
-function App() {
-  return <div className="text-lg font-bold">Namaste Dunia!</div>;
-}
+const App = () => {
+  return (
+    <div>
+      <Body />
+    </div>
+  );
+};
 
 export default App;
