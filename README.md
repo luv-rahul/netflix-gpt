@@ -2,6 +2,9 @@
 
 - npx create-react-app netflix-gpt
 - Install Tailwind CSS
+- Header
+- Routing 
+- Login / Sign Up Form
 
 ## Features
 
