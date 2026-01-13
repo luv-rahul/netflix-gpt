@@ -41,19 +41,19 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-screen bg-gradient-to-b from-black z-10 flex justify-between items-center px-10">
+    <div className="absolute w-screen bg-gradient-to-b from-black z-10 flex justify-between items-center px-10 py-5">
       <img className="w-40 " src={LOGO_URL} alt="logo"></img>
       <div className="flex gap-5">
         {user && (
           <img
-            className="w-14 rounded-md"
+            className="w-10 h-10 rounded-md"
             src={user?.photoURL}
             alt="user-icon"
           ></img>
         )}
         <button
           onClick={handleSignOut}
-          className="bg-red-500 text-white p-4 rounded-md"
+          className="bg-red-500 text-white px-4 py-1 rounded-sm"
         >
           {user ? "Sign out" : "Sign In"}
         </button>
