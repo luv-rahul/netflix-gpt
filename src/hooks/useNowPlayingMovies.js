@@ -1,12 +1,17 @@
 import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
-import { addNowPlayingMovies } from "../utils/moviesSlice";
+import {
+  addNowPlayingMovies,
+  addPopularMovies,
+  addTopRatedMovies,
+  addUpcomingMovies,
+} from "../utils/moviesSlice";
 import { useEffect } from "react";
 
 export const useNowPlayingMovies = () => {
   const dispatch = useDispatch();
 
-  const getNowPlayingMovie = async (params) => {
+  const getNowPlayingMovie = async () => {
     const data = await fetch(
       "https://api.themoviedb.org/3/movie/now_playing?language=in-IN&page=1",
       API_OPTIONS
@@ -17,5 +22,56 @@ export const useNowPlayingMovies = () => {
 
   useEffect(() => {
     getNowPlayingMovie();
+  }, []);
+};
+
+export const usePopularMovies = () => {
+  const dispatch = useDispatch();
+
+  const getPopularMovies = async () => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/movie/popular",
+      API_OPTIONS
+    );
+    const json = await data.json();
+    dispatch(addPopularMovies(json.results));
+  };
+
+  useEffect(() => {
+    getPopularMovies();
+  }, []);
+};
+
+export const useTopRatedMovies = () => {
+  const dispatch = useDispatch();
+
+  const getTopRatedMovies = async () => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/movie/top_rated",
+      API_OPTIONS
+    );
+    const json = await data.json();
+    dispatch(addTopRatedMovies(json.results));
+  };
+
+  useEffect(() => {
+    getTopRatedMovies();
+  }, []);
+};
+
+export const useUpcomingMovies = () => {
+  const dispatch = useDispatch();
+
+  const getUpcomingMovies = async () => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/movie/upcoming",
+      API_OPTIONS
+    );
+    const json = await data.json();
+    dispatch(addUpcomingMovies(json.results));
+  };
+
+  useEffect(() => {
+    getUpcomingMovies();
   }, []);
 };
